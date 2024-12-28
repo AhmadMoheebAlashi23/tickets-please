@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\V1\TicketController;
+use App\Http\Controllers\AuthController;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,22 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/login', [AuthController::class,'login']);
-Route::post('/register', [AuthController::class,'register']);
-
-Route::middleware('auth:sanctum')->post('/logout',[AuthController::class,'logout']);
-
-// Route::get('/tickets',function(){
-//     return Ticket::all();
-// });
-
-// Route::get('/l', function () {
-
-//    return response()->json([
-//         'message'=>'Hell00'
-//     ],200);
-
-// });
+Route::middleware('auth:sanctum')->apiResource("tickets",TicketController::class);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
